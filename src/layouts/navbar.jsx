@@ -9,9 +9,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { CircleUser, Menu, Package2 } from "lucide-react";
+import { CircleUser, Menu, Home, Map, Mail } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
-import { navItems } from "../App";
+
+const navItems = [
+  { to: "/", title: "Home", icon: Home },
+  { to: "/plan-trip", title: "Plan Trip", icon: Map },
+  { to: "/contact", title: "Contact", icon: Mail },
+];
 
 const Layout = () => {
   return (
@@ -21,7 +26,7 @@ const Layout = () => {
         <MobileNav />
         <UserMenu />
       </header>
-      <main className="flex-grow p-4 overflow-auto">
+      <main className="flex-grow p-6 bg-gray-100 overflow-auto">
         <Outlet />
       </main>
     </div>
@@ -34,11 +39,12 @@ const DesktopNav = () => (
       to="/"
       className="flex items-center gap-2 text-lg font-semibold md:text-base"
     >
-      <Package2 className="h-6 w-6" />
-      <span className="sr-only">Acme Inc</span>
+      <Map className="h-6 w-6" />
+      <span className="sr-only">Kayak Trip Planner</span>
     </NavItem>
     {navItems.map((item) => (
       <NavItem key={item.to} to={item.to}>
+        <item.icon className="h-5 w-5 mr-2" />
         {item.title}
       </NavItem>
     ))}
@@ -59,11 +65,12 @@ const MobileNav = () => (
           to="/"
           className="flex items-center gap-2 text-lg font-semibold"
         >
-          <Package2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
+          <Map className="h-6 w-6" />
+          <span className="sr-only">Kayak Trip Planner</span>
         </NavItem>
         {navItems.map((item) => (
           <NavItem key={item.to} to={item.to}>
+            <item.icon className="h-5 w-5 mr-2" />
             {item.title}
           </NavItem>
         ))}
